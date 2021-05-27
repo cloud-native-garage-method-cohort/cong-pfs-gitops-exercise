@@ -4,10 +4,10 @@ metadata:
   annotations:
     enzo: "true"
   labels:
-    app: express-sample-app
-    app.kubernetes.io/instance: express-sample-app
-    app.kubernetes.io/name: express-sample-app
-  name: express-sample-app
+    app: cong-nextjs
+    app.kubernetes.io/instance: cong-nextjs
+    app.kubernetes.io/name: cong-nextjs
+  name: cong-nextjs
 spec:
   ports:
   - name: http
@@ -15,8 +15,8 @@ spec:
     protocol: TCP
     targetPort: 3000
   selector:
-    app.kubernetes.io/instance: express-sample-app
-    app.kubernetes.io/name: express-sample-app
+    app.kubernetes.io/instance: cong-nextjs
+    app.kubernetes.io/name: cong-nextjs
   sessionAffinity: None
   type: ClusterIP
 ---
@@ -24,29 +24,29 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    app.openshift.io/vcs-uri: https://github.com/rampadc/express-sample-app
+    app.openshift.io/vcs-uri: https://github.com/rampadc/cong-nextjs
     enzo: "true"
   labels:
-    app: express-sample-app
-    app.kubernetes.io/instance: express-sample-app
-    app.kubernetes.io/name: express-sample-app
+    app: cong-nextjs
+    app.kubernetes.io/instance: cong-nextjs
+    app.kubernetes.io/name: cong-nextjs
     app.openshift.io/runtime: js
-  name: express-sample-app
+  name: cong-nextjs
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app.kubernetes.io/instance: express-sample-app
-      app.kubernetes.io/name: express-sample-app
+      app.kubernetes.io/instance: cong-nextjs
+      app.kubernetes.io/name: cong-nextjs
   template:
     metadata:
       annotations:
         enzo: "true"
       labels:
-        app.kubernetes.io/instance: express-sample-app
-        app.kubernetes.io/name: express-sample-app
+        app.kubernetes.io/instance: cong-nextjs
+        app.kubernetes.io/name: cong-nextjs
     spec:
       containers:
       - env:
@@ -54,7 +54,7 @@ spec:
         - name: PROTOCOLS
         - name: LOG_LEVEL
           value: debug
-        image: image-registry.openshift-image-registry.svc:5000/cong-nguyen-pipeline-from-scratch/express-sample-app:8f52a3295be3e90f3c10176d00233097f58ef960
+        image: image-registry.openshift-image-registry.svc:5000/cong-nguyen-pipeline-from-scratch/cong-nextjs:39b7f49b326dc6ada7e95cf7faeec8eb2c0f3922
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -65,7 +65,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: express-sample-app
+        name: cong-nextjs
         ports:
         - containerPort: 3000
           name: http
@@ -95,12 +95,12 @@ metadata:
     argocd.argoproj.io/sync-options: Validate=false
     enzo: "true"
     openshift.io/host.generated: "true"
-  name: express-sample-app
+  name: cong-nextjs
 spec:
   tls:
     termination: edge
   to:
     kind: Service
-    name: express-sample-app
+    name: cong-nextjs
     weight: 100
   wildcardPolicy: None
